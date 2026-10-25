@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Central de Bomberos</title>
+
+    <style>
+        :root {
+            --rojo: #d62222;
+            --rojo-oscuro: #991b1b;
+            --amarillo: #facc15;
+            --fondo: #1e1e1e;
+            --panel: #2d2d2d;
+            --blanco: #f5f5f5;
+            --verde: #22c55e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--fondo);
+            background-image:
+                radial-gradient(#333 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .fire-station-card {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--panel);
+            border: 3px solid var(--rojo);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px #0009;
+        }
+
+        .reflective-line {
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--amarillo) 0 15px,
+                var(--fondo) 15px 30px
+            );
+        }
+
+        .header {
+            padding: 25px 20px;
+            text-align: center;
+            color: var(--blanco);
+            background-color: var(--rojo);
+            border-bottom: 4px solid var(--amarillo);
+        }
+
+        .header h1 {
+            font-size: 1.55rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            margin-top: 8px;
+            color: var(--amarillo);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .fire-form {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--blanco);
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            color: white;
+            background-color: #1a1a1a;
+            border: 2px solid #505050;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--rojo);
+            box-shadow: 0 0 8px #d6222266;
+        }
+
+        .form-help {
+            display: block;
+            margin-top: 6px;
+            color: #aaa;
+            font-size: 0.75rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            color: white;
+            background-color: var(--rojo);
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 4px 0 var(--rojo-oscuro);
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            background-color: #e52e2e;
+        }
+
+        .btn-submit:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .mensaje-exito {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            color: #bbf7d0;
+            background-color: #163c29;
+            border: 1px solid var(--verde);
+            border-radius: 6px;
+            text-align: center;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .mensaje-exito strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--verde);
+            font-size: 1.05rem;
+        }
+
+        .footer-status {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #555;
+            color: #ccc;
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-light {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 6px;
+            background-color: var(--verde);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--verde);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .fire-form {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+<link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+
+    <main class="fire-station-card">
+
+        <div class="reflective-line"></div>
+
+        <header class="header">
+            <h1>🚒 Central de Bomberos</h1>
+            <p>Sala de Control y Despacho</p>
+        </header>
+
+        <form id="formBomberos" class="fire-form">
+
+            <div class="form-group">
+                <label for="nombre">
+                    Nombre completo del bombero
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    placeholder="Ej. Felipe Antonio"
+                    autocomplete="name"
+                    required
+                >
+
+                <span class="form-help">
+                    Ingrese el nombre y apellido del personal de guardia.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="rango">Rango / Cargo</label>
+
+                <select id="rango" name="rango" required>
+                    <option value="" disabled selected>
+                        Selecciona un rango
+                    </option>
+                    <option value="Aspirante">Aspirante</option>
+                    <option value="Bombero/a">Bombero/a</option>
+                    <option value="Cabo">Cabo</option>
+                    <option value="Sargento">Sargento</option>
+                    <option value="Oficial">Oficial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estacion">
+                    Estación / Sala asignada
+                </label>
+
+                <input
+                    type="text"
+                    id="estacion"
+                    name="estacion"
+                    placeholder="Ej. Estación Central N.º 1"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-submit">
+                🚨 Registrar Entrada
+            </button>
+
+            <div
+                id="mensajeExito"
+                class="mensaje-exito"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+            <div class="footer-status">
+                <span class="status-light"></span>
+                Sistema operativo - Listo para responder
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        const formulario = document.getElementById("formBomberos");
+        const mensaje = document.getElementById("mensajeExito");
+
+        formulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nombre = document
+                .getElementById("nombre")
+                .value.trim();
+
+            const rango = document.getElementById("rango").value;
+
+            const estacion = document
+                .getElementById("estacion")
+                .value.trim();
+
+            if (!nombre || !rango || !estacion) {
+                return;
+            }
+
+            const titulo = document.createElement("strong");
+            titulo.textContent = "✓ ¡Entrada registrada!";
+
+            const detalle = document.createElement("p");
+            detalle.textContent =
+                `${rango} ${nombre} registrado en ${estacion}.`;
+
+            mensaje.replaceChildren(titulo, detalle);
+            mensaje.style.display = "block";
+
+            formulario.reset();
+        });
+    </script>
+
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
